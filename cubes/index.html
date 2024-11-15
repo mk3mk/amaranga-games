@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Cubes</title>
+<style type="text/css">
+body{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  border: 1px solid rgba(154, 147, 140, 0.5);
+  border-radius: 10px;
+  padding: 10px;
+  width: 97vw;
+  height: 90vh;
+  background: rgb(0,0,0);
+  background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(4,47,94,1) 35%, rgba(0,0,0,1) 100%);
+  font-family: sans-serif;
+  font-size: 16px;
+}
+  #range{
+    position: absolute;
+    top: 25px;
+    color: #fff;
+    border: 1px solid rgba(154, 147, 140, 0.5);
+    border-radius: 10px;
+    padding: 10px;
+    background: rgba(154, 147, 140, 0.15);
+    box-shadow: 1px 1px 35px rgba(255, 255, 255, 0.315);
+  }
+.cubeWrapper{
+  border: 1px solid green;
+  border-radius: 10px;
+  display: flex;
+  transform-origin: 15px 15px;
+  position: absolute; 
+  top: 50%;
+  left: 50%;
+  transition: 0.25s;
+  background: rgba(128,48,215,0.5);
+  box-shadow: 1px 1px 35px rgba(154, 147, 140, 0.5);
+  cursor: pointer;
+}
+  .cubeWrapperOut{
+  background: rgba(255, 0, 0, 1);
+  animation: animation-cubeWrapperOut 0.725s;
+  }
+@keyframes animation-cubeWrapperOut {   
+  0% {     
+    opacity: 1;
+    filter: blur(0px);
+  }   
+  100% {
+    opacity: 0;
+    filter: blur(13px);
+   }
+}
+.cube{
+  border: 1px solid rgba(154, 147, 140, 0.5);
+  border-radius: 10px;
+  width: 30px;
+  height: 30px;
+  transition: 0.25s;
+  margin-left: -5px;
+  animation: animation-cube 0.725s;
+}
+@keyframes animation-cube {   
+  0% {     
+    opacity: 1;
+    filter: blur(0px);
+
+  }   
+  100% {
+    opacity: 0;
+    filter: blur(3px);
+
+   }
+}
+
+#coords{
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  border: 1px solid green;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border: 1px solid rgba(154, 147, 140, 0.5);
+  border-radius: 10px;
+  padding: 10px;
+  background: rgba(154, 147, 140, 0.15);
+  box-shadow: 1px 1px 35px rgba(255, 255, 255, 0.15);
+}
+#coordtop,#coordleft,#coordright,#coordbottom{
+  border: 1px solid rgba(154, 147, 140, 0.5);
+  border-radius: 10px;
+  padding: 10px;
+  width: 70px;
+  height: 30px;
+  color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(154, 147, 140, 0.15);
+}
+.bgred{
+  background: rgba(255, 0, 0, 0.5);
+  animation: animation-bgred 0.725s;
+}
+@keyframes animation-bgred {   
+  0% {     
+    opacity: 1;
+    filter: blur(0px);
+    transform: scale(1);
+  }   
+  100% {
+    opacity: 0;
+    filter: blur(13px);
+    transform: scale(2);
+   }
+}
+.bggreen{
+  background: green;
+}
+  #mousePositions{
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(154, 147, 140, 0.5);
+  background: rgba(154, 147, 140, 0.315);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 1px 1px 35px rgba(255, 255, 255, 0.15);
+    z-index: 25;
+  }
+  
+  .clickCube{
+  border: 1px solid rgba(154, 147, 140, 0.5);
+  border-radius: 10px;
+  width: 30px;
+  height: 30px;
+  transition: 1.25s;
+  position: absolute;
+  animation: animation-clickCube 2.725s;
+  }
+    .clickCube:hover{
+  transform: scale(2);
+  transition: 0.025s;
+  }
+  @keyframes animation-clickCube {   
+  0% {     
+    opacity: 1;
+    filter: blur(0px);
+
+  }   
+  100% {
+    opacity: 0;
+    filter: blur(13px);
+
+   }
+}
+</style>
+</head>
+<body>
+  
+<a href="javascript:history.back()">Go Back</a>
+
+<div id="range">
+  <label>Speed: </label>
+  <input type="range" class="range-slider__range" name="ageInputName" id="ageInputId" value="500" min="10" max="1000" onchange="changeSpeed(this);" oninput="ageOutputId.value = ageInputId.value">
+  <output name="ageOutputName" id="ageOutputId" class="range-slider__value">24</output>
+</div>
+  
+<div id="coords">
+  <div id="coordtop">on</div>
+  <div id="coordleft">out</div>
+  <div id="coordright">score</div>
+  <div id="coordbottom">reset</div>
+</div>
+  
+<div id="mousePositions">
+  <p>mousePositions</p>
+  <input type="text" id="X">
+  <input type="text" id="Y">
+</div>
+  
+<script type="text/javascript">
+let body = document.querySelector(`body`);
+let cubeWrapper = document.createElement("div");
+let quantity = 4;
+let angle = 15;
+let lastPosition = { top: 0, left: 0 }; // Хранит последнюю позицию
+let stop = false;
+let speed = 50;
+let score = 0;
+
+let ageInputId = document.querySelector(`#ageInputId`);
+  
+let coords = document.querySelector(`#coords`);
+let coordtop = document.querySelector(`#coordtop`);
+let coordleft = document.querySelector(`#coordleft`);
+let coordright = document.querySelector(`#coordright`);
+let coordbottom = document.querySelector(`#coordbottom`);
+  
+  // ageInputName
+
+// coordtop.classList.add('bggreen');
+// coordleft.classList.add('bggreen');
+// coordright.classList.add('bggreen');
+// coordbottom.classList.add('bggreen');
+
+// Получаем координаты краев body
+const bodyRect = body.getBoundingClientRect();
+
+// Выводим координаты в консоль
+console.log('Координаты краев body:');
+console.log('Верх: ', bodyRect.top);  // 8
+console.log('Низ: ', bodyRect.bottom); // 690
+console.log('Лево: ', bodyRect.left); // 8
+console.log('Право: ', bodyRect.right); // 1206
+
+// Function to generate random number
+function randomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
+}
+
+
+
+function insertWrapper(angle){
+  if (stop == false){
+      cubeWrapper.classList.add('cubeWrapper');
+      // angle = angle - 10;
+      // angle = randomNumber(-10, 125);
+      cubeWrapper.style.transform = `rotate(${angle}deg)`;
+      cubeWrapper.style.top = `${lastPosition.top}px`; // Устанавливаем верхнюю позицию
+      cubeWrapper.style.left = `${lastPosition.left}px`; // Устанавливаем левую позицию
+      body.append(cubeWrapper); 
+      insertCube();
+  } else {
+    // body.style.background = "red";
+  }
+}
+insertWrapper();
+
+function insertCube(){
+let randomquantity = randomNumber(3, 8);
+setTimeout(() => {
+  if(quantity<randomquantity){
+      let cube = document.createElement("div");
+      cube.classList.add('cube');
+      cubeWrapper.append(cube);
+      // insertCube();
+      quantity = quantity + 1;
+      let cubeCoord = cube.getBoundingClientRect();
+      // console.log(cubeCoord.top, cubeCoord.right, cubeCoord.bottom, cubeCoord.left);
+      // console.log(angle);
+
+      // if(cubeCoord.top < 700 & cubeCoord.top > 100 & cubeCoord.left > 100 & cubeCoord.left < 1300){
+        
+      if(cubeCoord.top < bodyRect.bottom & cubeCoord.top > bodyRect.top & cubeCoord.left > bodyRect.left & cubeCoord.left < bodyRect.right){
+        
+        // angle = 45;
+        //nsertWrapper(45);
+        // stop = true;
+        // angle = angle + randomNumber(-2, 2);
+        coordtop.classList.add('bgred');
+        coordleft.classList.remove('bgred');
+        coordright.classList.remove('bgred');
+        coordbottom.classList.remove('bgred');
+        // console.log(angle);
+        insertWrapper(angle);
+      }else {
+        
+        lastPosition.top = 150;
+        lastPosition.left = 150;
+        cubeWrapper.classList.remove('cubeWrapperOut');
+        angle = angle * -1;
+        coordtop.classList.remove('bgred');
+        coordleft.classList.add('bgred');
+        coordright.classList.remove('bgred');
+        coordbottom.classList.remove('bgred');
+        insertWrapper(angle);
+        // console.log('cubeCoord.right > bodyRect.right');
+      }
+      
+    }else{
+      angle = randomNumber(-15, 135);
+      const lastCube = cubeWrapper.lastChild; // Получаем последний куб
+      const lastCubeRect = lastCube.getBoundingClientRect(); // Получаем координаты последнего куба
+      lastPosition.top = lastCubeRect.top + 30; // Устанавливаем новую верхнюю позицию
+      lastPosition.left = lastCubeRect.left  + 30; // Сохраняем левую позицию
+      cubeWrapper.innerHTML = "";
+      quantity = 1;
+      insertWrapper();
+    }
+  }, speed);
+}
+
+// insertWrapper();
+// insertCube();
+
+cubeWrapper.addEventListener("click", function (e) {
+  console.log(e.currentTarget);
+  cubeWrapper.classList.add('cubeWrapperOut');
+  score++;
+  coordright.innerText = "score = " + score;
+  console.log(`Координаты клика: X = ${e.clientX}, Y = ${e.clientY}`);
+});
+
+coordbottom.onclick = (e) => cubeWrapper.classList.remove('cubeWrapperOut');
+
+// mousemove
+// click
+  
+var X = document.getElementById('X');
+var Y = document.getElementById('Y');
+
+function pos(e){
+  X.value = e.pageX;
+  Y.value = e.pageY;
+  // insertWrapper();
+  // speed = (X.value / 10) + 25;
+}
+
+addEventListener('mousemove', pos, false);
+
+ageInputId.onchange = function() {
+    speed = 12200 / ageInputId.value;
+};
+  
+  
+function addCubes(){
+  let randVert;
+  let randHoriz;
+  let randScale;
+  
+document.onmousemove  = function (e) {
+randVert = randomNumber(15, 90);
+randHoriz = randomNumber(2, 95);
+randScale = randomNumber(1, 3);
+  
+  
+  let clickCube = document.createElement("div");
+  let clickCubes = document.querySelectorAll(".clickCube");
+  clickCube.classList.add('clickCube');
+  clickCube.style.top += randVert + e.clientY/100 + '%'; // Устанавливаем верхнюю позицию
+  clickCube.style.left += randHoriz + e.clientX/100 + '%'; // Устанавливаем левую позицию
+  clickCube.style.transform += "scale(" + randScale + ")"; // Устанавливаем Scale
+  // cubeWrapper.append(clickCube); 
+  function appendClickCube(){
+    body.append(clickCube); 
+  }
+  appendClickCube();
+  addCubes();
+  console.log(`Координаты клика: X = ${e.clientX}, Y = ${e.clientY}` + `clickCubes.length = ` + clickCubes.length);
+  if(clickCubes.length > 130){
+    let clickCubeFirst = document.querySelector(".clickCube");
+    clickCubeFirst.remove();
+  }
+  
+  clickCubes = document.querySelectorAll(".clickCube");
+  
+  for (let i=0; i<clickCubes.length; i++){
+    clickCubes[i].addEventListener("mouseover", function() {
+      clickCubes[i].classList.add('cubeWrapper');
+    })
+    clickCubes[i].addEventListener("click", function() {
+      clickCubes[i].classList.remove('cubeWrapper');
+      clickCubes[i].classList.add('bgred');
+    })
+  }
+}
+
+  
+}
+  
+addCubes();
+
+</script>	
+</body>
+</html>
