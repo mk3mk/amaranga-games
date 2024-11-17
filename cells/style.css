@@ -1,0 +1,99 @@
+body{
+  border:0px solid red;
+  height:100vw;
+  width:100vh;
+  margin: 80px auto;
+  animation: animation-body 4s linear infinite alternate;
+}
+.navbar{
+  max-width: 1140px;
+  margin: auto;
+  border-bottom: 5px solid #fff;
+}
+#inputs{
+  color: #fff;
+  font-size: 22px;
+  background: #000;
+  padding:45px;
+}
+.bgred{
+  background:rgba(23, 250, 38, 0.15);
+  background:rgba(255, 133, 205, 0.93);
+  border:7px solid green;
+  width:55px;
+  height:25px;
+  overflow: hidden;
+  transition: 0.25s;
+  border-radius:10px;
+  animation: animation-green 4s linear infinite alternate;
+}
+.bgblue{
+  background:rgba(34, 8, 255, 0.8);
+  border:10px solid blue;
+  width:55px;
+  height:25px;
+  overflow: hidden;
+  transition: 0.25s;
+  animation: animation-blue 4s linear infinite alternate;
+}
+.bggreen{
+  background:rgba(34, 222, 91, 0.8);
+  border:8px solid blue;
+  width:85px;
+  height:25px;
+  overflow: hidden;
+  transition: 0.25s;
+  transform: scale(0.85);
+  animation: animation-green 4s linear infinite alternate;
+}
+.bgcyan{
+  background:rgba(41, 243, 245, 0.8);
+  transition: 0.25s;
+  transform: scale(0.85);
+}
+table{
+  border-radius:20px;
+  transform: scale(0.85, 0.75);
+  transform-origin: left top;
+}
+
+@keyframes animation-green {   
+  0% {     
+    background:rgba(34, 222, 91, 0.8);
+    filter: blur(0px);
+  }   
+  100% {
+    background:rgba(206, 206, 99, 0.93);
+    filter: blur(1px);
+   }
+}
+
+@keyframes animation-blue {   
+  0%{     
+    background:rgba(97, 203, 232, 0.93);
+  }   
+  100% {
+    background:rgba(255, 186, 244, 0.93);
+   }
+}
+
+@keyframes animation-red {   
+  0% {     
+    background:rgba(255, 133, 205, 0.93);
+  }   
+  100% {
+    background:rgba(255, 110, 85, 0.93);
+   }
+}
+
+@keyframes animation-body {   
+  0%{     
+    background:rgba(3, 5, 24, 0.95);
+  }   
+  50% {
+    background:rgba(30, 3, 55, 0.95);
+   }
+  100% {     
+    background:rgba(3, 5, 24, 0.95);
+  }  
+}
