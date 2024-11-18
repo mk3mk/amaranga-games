@@ -1,0 +1,305 @@
+body {
+    width: 95vw;
+    height: 75vh;
+    padding-top: 55px;
+    background: rgb(2, 0, 36);
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(61, 61, 124, 1) 100%);
+    overflow-X: hidden;
+}
+
+#back {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    height: 50%;
+    border: px solid red;
+    background: rgba(0, 0, 0, 0.05);
+    background: rgb(2, 0, 36);
+    background: linear-gradient(32deg, rgba(2, 0, 36, 1) 0%, rgba(38, 73, 112, 1) 100%);
+    filter: blur(5px);
+    overflow: hidden;
+}
+
+#back-light-1 {
+    position: absolute;
+    width: 300px;
+    height: 500px;
+    background: rgba(255, 255, 255, 0.55);
+    bottom: -460px;
+    right: 150px;
+    border-radius: 50%;
+    filter: blur(99px);
+    transition: 0.5s;
+}
+
+#wrapper {
+    width: 95vw;
+    height: 75vh;
+    perspective: 1700px;
+    transform-style: preserve-3d;
+    transition: 1.5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    transform-origin: 50% 50%;
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+}
+
+.card {
+    width: 200px;
+    height: 300px;
+    border: 1px solid #fcd707;
+    border-radius: 25px;
+    transform: rotateX(-10deg) rotateY(30deg) rotateZ(0deg);
+    transition: 1.5s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transform-style: preserve-3d;
+    background: rgba(0, 0, 0, 0.525);
+    margin: 25px;
+}
+
+.card:hover {
+    transform: rotateX(-10deg) rotateY(-20deg) rotateZ(0deg);
+    transition: 1.5s;
+    background: rgba(0, 0, 0, 0.845);
+}
+
+.card h2,
+h6,
+p {
+    color: #fcd707;
+}
+
+.card-circle {
+    width: 100px;
+    height: 100px;
+    border: 2px solid #fcd707;
+    border-radius: 50px;
+    background: rgb(70, 113, 252);
+    background: radial-gradient(circle, rgba(70, 113, 252, 1) 16%, rgba(43, 60, 145, 1) 95%);
+    transform-style: preserve-3d;
+    cursor: pointer;
+    opacity: 0.55;
+    transition: .5s;
+    transform: translate3d(0px, 0px, 1px);
+    overflow: hidden;
+}
+
+.card-circle:hover {
+    width: 100px;
+    height: 100px;
+    border: px solid #777;
+    border-radius: 50px;
+    background: rgb(70, 113, 252);
+    background: radial-gradient(circle, rgba(70, 113, 252, 1) 16%, rgba(43, 60, 145, 1) 95%);
+    transform-style: preserve-3d;
+    cursor: pointer;
+    opacity: 1;
+    transition: .5s;
+    transform: scale(1.1) translate3d(0px, 0px, 15px);
+}
+
+.card-circle:active {
+    background: blue;
+    transition: .5s;
+    transform: translate3d(0px, 0px, 50px)scale(1.1);
+}
+
+.card-circle-inner {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border: px solid #fff;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.50);
+    transition: .5s;
+    transform: translate3d(0px, -170px, 0px)scale(1);
+    filter: blur(9px);
+}
+
+.card-bottom-shadow {
+    position: absolute;
+    width: 200px;
+    height: 20px;
+    background: #000;
+    border: 0px solid #000;
+    bottom: -30px;
+    transform: rotateX(90deg) rotateY(0deg) rotateZ(0deg);
+    filter: blur(15px);
+}
+
+.card-reflection {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 25px;
+    bottom: -230px;
+    background: rgba(255, 255, 255, 0.025);
+    filter: blur(8px);
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.highlight-wrapper {
+    position: absolute;
+    width: 190px;
+    height: 290px;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.card-highlight-1 {
+    position: absolute;
+    width: 500px;
+    height: 40px;
+    border-radius: 25px;
+    top: -30px;
+    filter: blur(8px);
+    background: rgba(255, 255, 255, 0.55);
+    transition: 0.35s;
+}
+
+.card-highlight-2 {
+    position: absolute;
+    width: 500px;
+    height: 40px;
+    border-radius: 25px;
+    top: 120px;
+    left: -500px;
+    transform: rotate(-45deg);
+    filter: blur(8px);
+    background: rgba(255, 255, 255, 0.55);
+    transition: 0.55s;
+}
+
+.card:hover .card-highlight-2 {
+    left: 200px;
+}
+
+#spot-light-1 {
+    position: fixed;
+    bottom: 50px;
+    right: 20px;
+    width: 400px;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 50%;
+    filter: blur(56px);
+}
+
+.light-wrapper {
+    position: relative;
+    width: 80%;
+    height: 40px;
+    border-radius: 25px;
+    bottom: 10px;
+    border: px solid red;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    transform-style: preserve-3d;
+}
+
+.light-1 {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    border-radius: 25px;
+    bottom: 0px;
+    border: 2px solid #fcd707;
+    background: rgb(252, 225, 7);
+    opacity: 0.65;
+    transition: 0.25s;
+    background: radial-gradient(circle, rgba(252, 225, 7, 1) 7%, rgba(255, 113, 12, 1) 98%);
+    cursor: pointer;
+    transform: scale(1) translate3d(0px, 0px, 10px);
+    z-index: 55;
+    transform-style: preserve-3d;
+}
+
+.light-1:hover {
+    transform: scale(1.2) translate3d(0px, 0px, 25px);
+    opacity: 1;
+}
+
+.light-2 {
+    position: relative;
+    width: 20px;
+    height: 150px;
+    border: px solid red;
+    transform: translate3d(0px, 10px, 10px) rotateX(90deg) rotateY(0deg) rotateZ(0deg);
+    background: radial-gradient(circle, rgba(252, 225, 7, 1) 7%, rgba(255, 113, 12, 1) 98%);
+    border-radius: 50%;
+    filter: blur(16px);
+}
+
+.round-auto {
+    animation: round-auto 3.5s linear infinite;
+}
+
+@keyframes round-auto {
+    from {
+        transform: rotateY(0deg);
+    }
+    to {
+        transform: rotateY(360deg);
+    }
+}
+
+.red {
+    background: rgba(100, 0, 0, 0.525);
+}
+
+.fly-button {
+    width: 100px;
+    height: 100px;
+    border: px solid red;
+    position: fixed;
+    bottom: 52px;
+    left: 68px;
+    border-radius: 50%;
+    background: rgb(38, 73, 112);
+    background: radial-gradient(circle, rgba(38, 73, 112, 1) 13%, rgba(2, 0, 36, 0.8127626050420168) 78%, rgba(2, 0, 36, 0.5942752100840336) 88%, rgba(2, 0, 36, 0) 100%);
+    box-shadow: 0 0 30px #000;
+    overflow: hidden;
+    animation: fly-button 33.5s linear infinite;
+    cursor: pointer;
+}
+
+.fly-button-inner {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border: px solid red;
+    bottom: 62px;
+    left: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.21);
+    filter: blur(6px);
+}
+
+@keyframes fly-button {
+    from {
+        transform: translate(0vw, 0vh);
+    }
+    25% {
+        transform: translate(80vw, 0vh);
+    }
+    50% {
+        transform: translate(80vw, -80vh);
+    }
+    75% {
+        transform: translate(0vw, -80vh);
+    }
+    to {
+        transform: translate(0vw, 0vh);
+    }
+}
+
+.fly-button:hover {
+    box-shadow: 0 0 30px #777;
+}
